@@ -1,14 +1,14 @@
-.wrapper {
-    position: relative;
-    padding: 60px 0;
+.count-wrapper {
+  position: relative;
+  padding: 60px 0;
 }
 
 .count {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px;
-    line-height: 24px;
-    color: #6b7683;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  line-height: 24px;
+  color: #6b7683;
 }

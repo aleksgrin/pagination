@@ -1,128 +1,125 @@
-@import "~@styles/CONSTANTS.scss";
-
 $transition-duration: 0.3s;
 .wrapper {
-    padding: 10px;
-    display: flex;
-    justify-content: center;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .mainPart {
-    display: flex;
-    overflow: hidden;
-    transition: width $transition-duration ease;
+  display: flex;
+  overflow: hidden;
+  transition: width $transition-duration ease;
 }
 
 .rest {
-    font-family: $base-font-family-semi-bold;
-    font-size: 18px;
-    line-height: 24px;
-    color: #acb6c3;
-    width: 0;
-    overflow: hidden;
-    height: 32px;
-    margin-right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all $transition-duration ease;
-    &_visible {
-        margin-right: 8px;
-        width: 32px;
-    }
+  font-size: 18px;
+  line-height: 24px;
+  color: #acb6c3;
+  width: 0;
+  overflow: hidden;
+  height: 32px;
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-duration ease;
+  &_visible {
+    margin-right: 8px;
+    width: 32px;
+  }
 }
 
 .restInner {
-    transform: translateY(20px);
-    transition: transform $transition-duration ease $transition-duration / 2;
-    &_visible {
-        transform: translateY(0);
-    }
+  transform: translateY(20px);
+  transition: transform $transition-duration ease $transition-duration / 2;
+  &_visible {
+    transform: translateY(0);
+  }
 }
 
 .elem {
-    position: relative;
-    font-family: $base-font-family-semi-bold;
-    font-size: 18px;
-    line-height: 24px;
-    color: #acb6c3;
-    border: none;
-    background-color: transparent;
-    outline: none;
-    height: 32px;
-    margin-right: 8px;
-    padding: 0 10px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: maxWidth ease $transition-duration, padding ease $transition-duration;
-    overflow: hidden;
-    &:hover {
-        &::before {
-            background-color: rgba(0, 165, 255, 0.25);
-        }
-        color: #0b43da;
-    }
-    &:focus {
-        outline: none;
-    }
+  position: relative;
+  font-size: 18px;
+  line-height: 24px;
+  color: #acb6c3;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  height: 32px;
+  margin-right: 8px;
+  padding: 0 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: maxWidth ease $transition-duration,
+    padding ease $transition-duration;
+  overflow: hidden;
+  &:hover {
     &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        border-radius: 16px;
-        background-color: transparent;
-        transition: all ease $transition-duration;
+      background-color: rgba(0, 165, 255, 0.25);
     }
+    color: #0b43da;
+  }
+  &:focus {
+    outline: none;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;
+    background-color: transparent;
+    transition: all ease $transition-duration;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 0;
+    height: 2px;
+    width: 0;
+    background-color: #0b43da;
+    transition: width ease $transition-duration;
+  }
+  &_active {
+    color: #0b43da;
+    pointer-events: none;
     &::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 0;
-        height: 2px;
-        width: 0;
-        background-color: #0b43da;
-        transition: width ease $transition-duration;
+      width: 40%;
     }
-    &_active {
-        color: #0b43da;
-        pointer-events: none;
-        &::after {
-            width: 40%;
-        }
-    }
+  }
 }
 
 .arrow {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color ease $transition-duration;
-    &:hover {
-        background-color: rgba(0, 165, 255, 0.25);
-    }
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color ease $transition-duration;
+  &:hover {
+    background-color: rgba(0, 165, 255, 0.25);
+  }
+  svg path {
+    transition: stroke ease $transition-duration;
+  }
+  &_disable {
+    pointer-events: none;
     svg path {
-        transition: stroke ease $transition-duration;
+      stroke: #acb6c3;
     }
-    &_disable {
-        pointer-events: none;
-        svg path {
-            stroke: #acb6c3;
-        }
-    }
-    &_left {
-        margin-right: 28px;
-    }
-    &_right {
-        margin-left: 20px;
-        transform: rotate(180deg);
-    }
+  }
+  &_left {
+    margin-right: 28px;
+  }
+  &_right {
+    margin-left: 20px;
+    transform: rotate(180deg);
+  }
 }
