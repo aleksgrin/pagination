@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import React, { useMemo, useCallback } from "react";
-import MiddleELems from "./MiddleELems";
+import { GrowX } from "../Grow/Grow";
 import "./pagination.scss";
 
 const ArrowLeft = () => (
@@ -59,7 +59,7 @@ const Pagination = ({
 }: IProps) => {
   const onElemClick = useCallback(
     (nextPageNumber: number) => () => onClick(nextPageNumber),
-    []
+    [onClick]
   );
   const middleElems = useMemo(() => getMiddleElems(pageNumber, pagesAmount), [
     pageNumber,
@@ -100,11 +100,18 @@ const Pagination = ({
           ...
         </div>
       </div>
-      <MiddleELems
-        onClick={onElemClick}
-        pageNumber={pageNumber}
-        middleElems={middleElems}
-      />
+      {range(2, pagesAmount).map((elem) => (
+        <GrowX key={elem} isOpen={middleElems.includes(elem)}>
+          <button
+            className={classnames("elem", {
+              elem_active: pageNumber === elem - 1,
+            })}
+            onClick={onElemClick(elem - 1)}
+          >
+            {elem}
+          </button>
+        </GrowX>
+      ))}
       <div
         className={classnames("rest", {
           rest_visible: isVisibleRightRestElem,
