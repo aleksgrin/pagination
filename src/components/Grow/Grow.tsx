@@ -5,47 +5,59 @@ import React, {
   useState,
 } from "react";
 
-const DEFAULT_TRANSITION = "width ease .3s";
-
 interface IProps {
   isOpen: boolean;
-  transition?: string;
+  transitionDuration?: string;
+  initialGrow?: boolean;
+  transitionTimingFunction?: string;
+  className?: string;
+  type?: "x" | "y";
 }
 
-export const GrowX = ({
+export const Grow = ({
   isOpen,
   children,
-  transition = DEFAULT_TRANSITION,
+  className,
+  initialGrow = true,
+  type = "y",
+  transitionDuration = "0.3s",
+  transitionTimingFunction = "ease",
 }: PropsWithChildren<IProps>) => {
   const [open, setOpen] = useState(isOpen);
-  const [targetWidth, setTargetWidth] = useState<number | undefined>(
-    isOpen ? undefined : 0
+  const [targetValue, setTargetValue] = useState<number | undefined>(
+    initialGrow ? 0 : undefined
   );
 
   useEffect(() => {
     if (isOpen) setOpen(isOpen);
-    else setTargetWidth(0);
+    else setTargetValue(0);
   }, [isOpen]);
 
-  const ref = useCallback((node: HTMLElement | null) => {
-    if (!node) return;
-    setTargetWidth(node.scrollWidth);
-  }, []);
+  const ref = useCallback(
+    (node: HTMLElement | null) => {
+      if (!node) return;
+      const value = type === "y" ? node.scrollHeight : node.scrollWidth;
+      setTargetValue(value);
+    },
+    [type]
+  );
 
   return open ? (
     <div
       style={{
         overflow: "hidden",
-        display: "flex",
-        transition,
-        width: targetWidth,
+        transitionProperty: type === "y" ? "height" : "width",
+        transitionDuration,
+        transitionTimingFunction,
+        [type === "y" ? "height" : "width"]: targetValue,
       }}
+      className={className}
       onTransitionEnd={() => {
         if (!isOpen) setOpen(false);
       }}
       ref={ref}
     >
-      <div style={{ flexShrink: 0 }}>{children}</div>
+      {children}
     </div>
   ) : null;
 };
