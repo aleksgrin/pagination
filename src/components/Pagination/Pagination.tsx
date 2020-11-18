@@ -1,6 +1,6 @@
 import classnames from "classnames";
 import React, { useMemo, useCallback } from "react";
-import { Grow } from "../Grow/Grow";
+import Expandable from "../Expandable/Expandable";
 import "./pagination.scss";
 
 const ArrowLeft = () => (
@@ -101,7 +101,7 @@ const Pagination = ({
         </div>
       </div>
       {range(2, pagesAmount).map((elem) => (
-        <Grow key={elem} isOpen={middleElems.includes(elem)} type="x">
+        <Expandable key={elem} expanded={middleElems.includes(elem)} growProperty="width">
           <button
             className={classnames("elem", {
               elem_active: pageNumber === elem - 1,
@@ -110,7 +110,7 @@ const Pagination = ({
           >
             {elem}
           </button>
-        </Grow>
+        </Expandable>
       ))}
       <div
         className={classnames("rest", {
