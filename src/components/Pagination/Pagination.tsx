@@ -101,7 +101,11 @@ const Pagination = ({
         </div>
       </div>
       {range(2, pagesAmount).map((elem) => (
-        <Expandable key={elem} expanded={middleElems.includes(elem)} growProperty="width">
+        <Expandable
+          key={elem}
+          expanded={middleElems.includes(elem)}
+          growProperty="width"
+        >
           <button
             className={classnames("elem", {
               elem_active: pageNumber === elem - 1,
