@@ -23,6 +23,7 @@ $transition-duration: 0.3s;
   align-items: center;
   justify-content: center;
   transition: all $transition-duration ease;
+  flex-shrink: 0;
   &_visible {
     margin-right: 8px;
     width: 32px;
