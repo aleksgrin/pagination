@@ -61,10 +61,11 @@ const Pagination = ({
     (nextPageNumber: number) => () => onClick(nextPageNumber),
     [onClick]
   );
-  const middleElems = useMemo(() => getMiddleElems(pageNumber, pagesAmount), [
-    pageNumber,
-    pagesAmount,
-  ]);
+  const totalMiddleElems = useMemo(() => range(2, pagesAmount), [pagesAmount]);
+  const visibleMiddleElems = useMemo(
+    () => getMiddleElems(pageNumber, pagesAmount),
+    [pageNumber, pagesAmount]
+  );
 
   const isVisibleLeftRestElem =
     pagesAmount > TOTAL_VISIBLE_ELEMS && pageNumber >= FIRST_ELEM_WITH_OFFSET;
@@ -100,14 +101,15 @@ const Pagination = ({
           ...
         </div>
       </div>
-      {range(2, pagesAmount).map((elem) => (
+      {totalMiddleElems.map((elem: number) => (
         <Expandable
           key={elem}
-          expanded={middleElems.includes(elem)}
+          expanded={visibleMiddleElems.includes(elem)}
           growProperty="width"
+          className="elemWrap"
         >
           <button
-            className={classnames("elem", {
+            className={classnames(elem, {
               elem_active: pageNumber === elem - 1,
             })}
             onClick={onElemClick(elem - 1)}
