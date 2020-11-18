@@ -109,7 +109,7 @@ const Pagination = ({
           className="elemWrap"
         >
           <button
-            className={classnames(elem, {
+            className={classnames("elem", {
               elem_active: pageNumber === elem - 1,
             })}
             onClick={onElemClick(elem - 1)}
